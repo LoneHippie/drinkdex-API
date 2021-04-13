@@ -27,7 +27,10 @@ const app = express();
 //GLOBAL MIDDLEWARES
 
 //cors for proxy use
-app.use(cors());
+app.use(cors({
+    origin: 'https://drinkdex.netlify.app/',
+    credentials: true
+}));
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
 app.options('*', cors());
