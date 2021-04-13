@@ -22,16 +22,17 @@ const imageRouter = require('./routes/imageRoutes');
 //start express app
 const app = express();
 
-app.enable('trust proxy');
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
-
 //////////MIDDLEWARES
 
 //GLOBAL MIDDLEWARES
+
+//cors for proxy use
+app.use(cors({
+    origin: 'https://drinkdex.netlify.app/'
+}));
+
+//server response for pre-flight phase requests (cookies, delete, put, etc)
+app.options('*', cors());
 
 //serving static files
 //lets static files be accessed through images/ of uploads/ in frontend
@@ -39,14 +40,6 @@ app.use('/images', express.static('images'));
 
 //Security HTTP headers
 app.use(helmet());
-
-const corsOptions = {
-    origin: 'https://drinkdex.netlify.app',
-    credentials:  true
-};
-
-//cors for proxy use
-app.use(cors(corsOptions));
 
 //dev/prod options toggle
 if (process.env.NODE_ENV === 'development') {
