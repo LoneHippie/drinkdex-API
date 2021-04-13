@@ -29,14 +29,22 @@ const app = express();
 //cors for proxy use
 app.use(cors({
     origin: 'https://drinkdex.netlify.app',
-    credentials: true
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
-app.options('*', cors({
-    origin: 'https://drinkdex.netlify.app',
-    credentials: true
-}));
+// app.options('*', cors({
+//     origin: 'https://drinkdex.netlify.app',
+//     credentials: true
+// }));
+
+app.options("/*", function(req, res, next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.send(200);
+  });
 
 //serving static files
 //lets static files be accessed through images/ of uploads/ in frontend
@@ -64,10 +72,9 @@ app.use(cookieParser());
 
 //will log cookies in dev mode
 app.use((req, res, next) => {
-    // if (process.env.NODE_ENV === 'development') {
-    //     console.log(req.cookies.jwt);
-    // }
-    console.log(req.cookies.jwt);
+    if (process.env.NODE_ENV === 'development') {
+        console.log(req.cookies.jwt);
+    }
     next();
 });
 
