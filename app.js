@@ -22,6 +22,8 @@ const imageRouter = require('./routes/imageRoutes');
 //start express app
 const app = express();
 
+app.enable('trust proxy');
+
 //////////MIDDLEWARES
 
 //GLOBAL MIDDLEWARES
