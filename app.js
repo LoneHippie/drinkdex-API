@@ -41,7 +41,7 @@ app.use('/images', express.static('images'));
 app.use(helmet());
 
 const corsOptions = {
-    origin: 'https://drinkdex.netlify.app/',
+    origin: 'https://drinkdex.netlify.app',
     credentials:  true
 };
 
