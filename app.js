@@ -33,7 +33,10 @@ app.use(cors({
 }));
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
-app.options('*', cors());
+app.options('*', cors({
+    origin: 'https://drinkdex.netlify.app',
+    credentials: true
+}));
 
 //serving static files
 //lets static files be accessed through images/ of uploads/ in frontend
