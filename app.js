@@ -57,9 +57,10 @@ app.use(cookieParser());
 
 //will log cookies in dev mode
 app.use((req, res, next) => {
-    if (process.env.NODE_ENV === 'development') {
-        console.log(req.cookies.jwt);
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //     console.log(req.cookies.jwt);
+    // }
+    console.log(req.cookies.jwt);
     next();
 });
 
