@@ -28,8 +28,6 @@ const createSendToken = (user, statusCode, req, res) => {
     //remove pw from output response
     user.password = undefined;
 
-    console.log(token);
-
     res.status(statusCode).json({
         status: 'success',
         token,
