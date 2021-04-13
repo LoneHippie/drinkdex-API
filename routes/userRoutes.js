@@ -13,7 +13,6 @@ router.post('/logout', authController.logout);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
-///// uses protect middleware before ALL endpoints below this line vvv /////
 //////// ALL ROUTES AFTER THIS MIDDLEWARE ARE PROTECTED //////////
 router.use(authController.protect);
 

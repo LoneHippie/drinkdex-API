@@ -35,8 +35,13 @@ app.use('/images', express.static('images'));
 //Security HTTP headers
 app.use(helmet());
 
+const corsOptions = {
+    origin: 'https://drinkdex.herokuapp.com',
+    credentials:  true
+};
+
 //cors for proxy use
-app.use(cors());
+app.use(cors(corsOptions));
 
 //dev/prod options toggle
 if (process.env.NODE_ENV === 'development') {
