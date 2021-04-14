@@ -26,8 +26,6 @@ const app = express();
 
 //GLOBAL MIDDLEWARES
 
-app.use('trust proxy', 1);
-
 //cors for proxy use
 app.use(cors({
     origin: 'https://drinkdex.netlify.app',

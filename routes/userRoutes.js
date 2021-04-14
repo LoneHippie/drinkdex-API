@@ -1,9 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 
 const router = express.Router();
+
+router.use(cors({
+    origin: 'https://drinkdex.netlify.app',
+    credentials: true
+}));
 
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
