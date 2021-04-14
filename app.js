@@ -29,11 +29,7 @@ const app = express();
 app.use('trust proxy', 1);
 
 //cors for proxy use
-app.use(cors({
-    credentials: true,
-    origin: 'https://drinkdex.netlify.app',
-    optionsSuccessStatus: 200
-}));
+app.use(cors());
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
 app.options('*', cors({

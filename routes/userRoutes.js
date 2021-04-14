@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 
 const router = express.Router();
+
+router.use(cors());
 
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
