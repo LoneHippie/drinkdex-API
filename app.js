@@ -35,7 +35,13 @@ const app = express();
 //Security HTTP headers
 app.use(helmet());
 
-app.use(cors());
+app.set("trust proxy", 1);
+
+app.use(cors({
+    origin: 'https://drinkdex.netlify.app',
+    credentials: true,
+    optionsSuccessStatus: 200
+}));
 
 // app.options('*', cors());
 
