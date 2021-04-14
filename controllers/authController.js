@@ -17,10 +17,10 @@ const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
 
     const cookieOptions = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-        httpOnly: true,
         domain: 'https://drinkdex.netlify.app',
-        secure: req.secure || req.headers('x-forwarded-proto') === 'https' //heroku specific line
+        secure: req.secure || req.headers('x-forwarded-proto') === 'https', //heroku specific line
+        httpOnly: true,
+        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
     };
 
     //define cookie
