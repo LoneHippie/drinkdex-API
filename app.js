@@ -2,7 +2,7 @@ const express = require('express');
 
 //middleware packages
 const rateLimit = require('express-rate-limit');
-// const helmet = require('helmet');
+const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
@@ -32,6 +32,9 @@ const app = express();
 //     credentials: true
 // }));
 
+//Security HTTP headers
+app.use(helmet());
+
 app.use(cors());
 
 app.options('*', cors());
@@ -45,9 +48,6 @@ app.options('*', cors());
 //serving static files
 //lets static files be accessed through images/ of uploads/ in frontend
 app.use('/images', express.static('images'));
-
-//Security HTTP headers
-// app.use(helmet());
 
 //dev/prod options toggle
 if (process.env.NODE_ENV === 'development') {
