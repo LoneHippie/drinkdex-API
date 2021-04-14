@@ -28,7 +28,7 @@ const app = express();
 
 //cors for proxy use
 app.use('*', cors({
-    origin: 'https://drinkdex.netlify.app',
+    origin: 'https://drinkdex.netlify.app/',
     credentials: true
 }));
 

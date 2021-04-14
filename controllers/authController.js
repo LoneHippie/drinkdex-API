@@ -17,7 +17,7 @@ const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
 
     const cookieOptions = {
-        domain: 'https://drinkdex.netlify.app',
+        domain: 'https://drinkdex.netlify.app/',
         // secure: req.secure || req.headers('x-forwarded-proto') === 'https', //heroku specific line
         secure: true,
         httpOnly: true,
