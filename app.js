@@ -27,16 +27,23 @@ const app = express();
 //GLOBAL MIDDLEWARES
 
 //cors for proxy use
-app.use(cors({
-    origin: 'https://drinkdex.netlify.app',
-    credentials: true
-}));
-
-//server response for pre-flight phase requests (cookies, delete, put, etc)
-// app.options('*', cors({
+// app.use(cors({
 //     origin: 'https://drinkdex.netlify.app',
 //     credentials: true
 // }));
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
+    res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
+    next();
+});
+
+//server response for pre-flight phase requests (cookies, delete, put, etc)
+app.options('*', cors({
+    origin: 'https://drinkdex.netlify.app',
+    credentials: true
+}));
 
 //serving static files
 //lets static files be accessed through images/ of uploads/ in frontend
