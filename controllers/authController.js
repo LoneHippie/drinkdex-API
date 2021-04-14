@@ -16,8 +16,9 @@ const signToken = id => {
 const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
 
+    //removed domain: frontend url   from cookieOptions
+
     const cookieOptions = {
-        domain: 'https://drinkdex.netlify.app',
         secure: req.secure || req.headers('x-forwarded-proto') === 'https', //heroku specific line
         httpOnly: true,
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
