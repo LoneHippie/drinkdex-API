@@ -16,8 +16,6 @@ const signToken = id => {
 const createSendToken = (user, statusCode, req, res) => {
     const token = signToken(user._id);
 
-    //removed domain: frontend url   from cookieOptions
-
     const cookieOptions = {
         secure: req.secure || req.headers('x-forwarded-proto') === 'https', //heroku specific line
         httpOnly: true,

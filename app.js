@@ -2,7 +2,7 @@ const express = require('express');
 
 //middleware packages
 const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
@@ -34,6 +34,8 @@ const app = express();
 
 app.use(cors());
 
+app.options('*', cors());
+
 //server response for pre-flight phase requests (cookies, delete, put, etc)
 // app.options('*', cors({
 //     origin: 'https://drinkdex.netlify.app',
@@ -45,7 +47,7 @@ app.use(cors());
 app.use('/images', express.static('images'));
 
 //Security HTTP headers
-app.use(helmet());
+// app.use(helmet());
 
 //dev/prod options toggle
 if (process.env.NODE_ENV === 'development') {
