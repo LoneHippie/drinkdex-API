@@ -43,7 +43,7 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 
-// app.options('*', cors());
+app.options('*', cors());
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
 // app.options('*', cors({
