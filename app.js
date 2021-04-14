@@ -37,13 +37,16 @@ app.use(helmet());
 
 app.use(cors());
 
-app.options('*', cors());
+// app.options('*', cors());
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
 // app.options('*', cors({
 //     origin: 'https://drinkdex.netlify.app',
 //     credentials: true
 // }));
+
+//get cookies
+app.use(cookieParser());
 
 //serving static files
 //lets static files be accessed through images/ of uploads/ in frontend
@@ -62,9 +65,6 @@ const limiter = rateLimit({ //limits req per IP to 100 per hour
 });
 //apply limiter to all routes that start with /api
 app.use('/api', limiter);
-
-//get cookies
-app.use(cookieParser());
 
 //will log cookies in dev mode
 app.use((req, res, next) => {
