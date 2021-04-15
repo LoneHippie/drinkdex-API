@@ -2,13 +2,15 @@ const express = require('express');
 
 //middleware packages
 const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
+// const helmet = require('helmet'); //temporarily disabled, stops static serve of build folder
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+
+const path = require('path');
 
 //error handling modules
 const AppError = require('./utilities/appError');
@@ -27,7 +29,7 @@ const app = express();
 //GLOBAL MIDDLEWARES
 
 //Security HTTP headers
-app.use(helmet());
+// app.use(helmet());
 
 app.enable('trust proxy');
 
@@ -40,9 +42,14 @@ app.options('*', cors());
 //get cookies
 app.use(cookieParser());
 
-//serving static files
+//STATIC FILE SERVING
+
 //lets static files be accessed through images/ of uploads/ in frontend
 app.use('/images', express.static('images'));
+
+//allows static serve of build folder
+app.use(express.static(path.join(__dirname, 'build')));
+
 
 //dev/prod options toggle
 if (process.env.NODE_ENV === 'development') {
@@ -86,6 +93,11 @@ app.use(hpp({
 app.use('/api/v1/drinks', drinkRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/images', imageRouter);
+
+//serve static client
+app.use('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 //middleware for handling all undefined routes. Returns proper JSON formatted error to user
 app.all('*', (req, res, next) => {
