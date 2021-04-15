@@ -48,7 +48,7 @@ app.use(cookieParser());
 app.use('/images', express.static('images'));
 
 //allows static serve of build folder
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 
 //dev/prod options toggle
@@ -95,9 +95,9 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/images', imageRouter);
 
 //serve static client
-app.use('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.use('*', function (req, res) {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 //middleware for handling all undefined routes. Returns proper JSON formatted error to user
 app.all('*', (req, res, next) => {
