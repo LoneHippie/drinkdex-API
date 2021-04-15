@@ -32,16 +32,10 @@ app.use(helmet());
 app.enable('trust proxy');
 
 //enable cors for same origin
-app.use(cors({
-    credentials: true,
-    origin: 'https://drinkdex.netlify.app'
-}));
+app.use(cors());
 
 //server response for pre-flight phase requests (cookies, delete, put, etc)
-app.options('*', cors({
-    credentials: true,
-    origin: 'https://drinkdex.netlify.app'
-}));
+app.options('*', cors());
 
 //get cookies
 app.use(cookieParser());

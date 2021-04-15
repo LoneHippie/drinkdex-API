@@ -3,8 +3,6 @@ const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 
-const cors = require('cors');
-
 const router = express.Router();
 
 router.post('/signup', authController.signUp);
@@ -16,7 +14,6 @@ router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
 //////// ALL ROUTES AFTER THIS MIDDLEWARE ARE PROTECTED //////////
-router.use(cors());
 router.use(authController.protect);
 
 router.patch('/updateMyPassword', authController.updatePassword);
